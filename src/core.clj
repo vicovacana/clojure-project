@@ -1,4 +1,4 @@
-(ns .
+(ns core
   (:gen-class))
 
 (defn -main
