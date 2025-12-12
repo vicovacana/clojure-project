@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fd228551-807c-4207-b1b7-1227ce243d11" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/project.clj" beforeDir="false" afterPath="$PROJECT_DIR$/project.clj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/advent1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/advent.clj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/maze.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/core.clj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,26 +32,69 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="36ZrJv1SJJ1ONNDUXqlaE3Z5sYJ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "develop",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Ana/Desktop/clojure_project",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "terminal",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Clojure Application.advent.executor&quot;: &quot;Run&quot;,
+    &quot;Clojure Application.core.executor&quot;: &quot;Run&quot;,
+    &quot;Clojure REPL.REPL for clojure-project.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Ana/Desktop/clojure_project&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ana\Desktop\clojure_project" />
+    </key>
+  </component>
+  <component name="ReplState" timestamp="1765467753648">{:repl-history {:ide [], :local [], :remote []}}</component>
   <component name="RunManager">
+    <configuration default="true" type="Babashka" factoryName="BabashkaLocalRepl" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="bbPath" value="" />
+      <setting name="parameters" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <setting name="workingDir" value="" />
+      <setting name="focusEditor" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <option name="configVersion" value="1" />
+      <option name="options" />
+      <option name="profiles" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="displayName" value="" />
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <setting name="useHeartbeat" value="true" />
+      <setting name="focusEditor" value="false" />
+      <setting name="urlFile" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="clojure_project" />
       <method v="2">
@@ -79,7 +125,13 @@
       <workItem from="1765224882262" duration="1038000" />
       <workItem from="1765225960002" duration="283000" />
       <workItem from="1765226880868" duration="993000" />
-      <workItem from="1765227942225" duration="641000" />
+      <workItem from="1765227942225" duration="10613000" />
+      <workItem from="1765263127777" duration="2111000" />
+      <workItem from="1765298068946" duration="1214000" />
+      <workItem from="1765301061810" duration="8461000" />
+      <workItem from="1765399919525" duration="55000" />
+      <workItem from="1765399992593" duration="10973000" />
+      <workItem from="1765473836361" duration="1460000" />
     </task>
     <task id="LOCAL-00001" summary="init leiningen app">
       <option name="closed" value="true" />
@@ -89,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765227187845</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="set up for lein project">
+      <option name="closed" value="true" />
+      <created>1765228645475</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765228645475</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,6 +160,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init leiningen app" />
-    <option name="LAST_COMMIT_MESSAGE" value="init leiningen app" />
+    <MESSAGE value="set up for lein project" />
+    <option name="LAST_COMMIT_MESSAGE" value="set up for lein project" />
   </component>
 </project>
