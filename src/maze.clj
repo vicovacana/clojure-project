@@ -1,3 +1,5 @@
+(ns maze)
+
 (defn make-grid [rows cols initial]
   (vec (repeat rows
                (vec (repeat cols initial)))))
@@ -11,8 +13,11 @@
   (assoc-in grid [row col] newValue))
 
 (defn getIndex [rowIndex colIndex rows cols]
-  (when (and (>= rowIndex 0) (>= colIndex 0) (<= rowIndex (- rows 1)) (<= cols (- colIndex 1)))
-  (+ colIndex (* rowIndex cols))))
+  (when (and (>= rowIndex 0)
+             (< rowIndex rows)
+             (>= colIndex 0)
+             (< colIndex cols))
+    (+ colIndex (* rowIndex cols))))
 
 (defn getNeighbors [rowIndex colIndex grid]
   (let [rows (count grid)

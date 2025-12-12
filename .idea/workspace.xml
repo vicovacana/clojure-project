@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd228551-807c-4207-b1b7-1227ce243d11" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/advent1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/advent.clj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/maze.clj" afterDir="false" />
+    <list default="true" id="fd228551-807c-4207-b1b7-1227ce243d11" name="Changes" comment="functions for sem 10.12 and 12.12">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/core.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/maze.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze.clj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +26,9 @@
     &quot;accountId&quot;: &quot;115a0e0d-3351-44dc-a55d-13bc3be6efe6&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -132,6 +133,7 @@
       <workItem from="1765399919525" duration="55000" />
       <workItem from="1765399992593" duration="10973000" />
       <workItem from="1765473836361" duration="1460000" />
+      <workItem from="1765573981881" duration="686000" />
     </task>
     <task id="LOCAL-00001" summary="init leiningen app">
       <option name="closed" value="true" />
@@ -149,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765228645475</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="functions for sem 10.12 and 12.12">
+      <option name="closed" value="true" />
+      <created>1765574348855</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1765574348857</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +171,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init leiningen app" />
     <MESSAGE value="set up for lein project" />
-    <option name="LAST_COMMIT_MESSAGE" value="set up for lein project" />
+    <MESSAGE value="functions for sem 10.12 and 12.12" />
+    <option name="LAST_COMMIT_MESSAGE" value="functions for sem 10.12 and 12.12" />
   </component>
 </project>
