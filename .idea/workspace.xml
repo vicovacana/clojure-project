@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fd228551-807c-4207-b1b7-1227ce243d11" name="Changes" comment="functions for sem 10.12 and 12.12">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/core.clj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/maze.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/maze.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.clj" beforeDir="false" afterPath="$PROJECT_DIR$/project.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/_test.clj" beforeDir="false" afterPath="$PROJECT_DIR$/test/maze_test.clj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +133,9 @@
       <workItem from="1765399919525" duration="55000" />
       <workItem from="1765399992593" duration="10973000" />
       <workItem from="1765473836361" duration="1460000" />
-      <workItem from="1765573981881" duration="686000" />
+      <workItem from="1765573981881" duration="1483000" />
+      <workItem from="1765617572477" duration="2482000" />
+      <workItem from="1765836222949" duration="3421000" />
     </task>
     <task id="LOCAL-00001" summary="init leiningen app">
       <option name="closed" value="true" />
@@ -159,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765574348857</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="functions for sem 10.12 and 12.12">
+      <option name="closed" value="true" />
+      <created>1765574805021</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765574805021</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
