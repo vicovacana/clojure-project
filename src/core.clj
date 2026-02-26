@@ -1,7 +1,9 @@
-(ns .
-  (:gen-class))
+(ns core
+  (:gen-class)
+  (:require [maze :as maze]))
 
 (defn -main
   "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+  [_]
+  (println (maze/make-grid 3 10 5))
+  )
