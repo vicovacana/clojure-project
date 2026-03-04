@@ -47,20 +47,20 @@
         yAxis (- y2 y1)]
         (cond
         (= xAxis 1) (-> grid
-                  (remove-wall-unit [x1 y1] :e)
-                  (remove-wall-unit [x2 y2] :w)
-                  )
-        (= xAxis -1) (-> grid
-                  (remove-wall-unit [x1 y1] :w)
-                  (remove-wall-unit [x2 y2] :e)
-                  )
-        (= yAxis 1) (-> grid
                   (remove-wall-unit [x1 y1] :s)
                   (remove-wall-unit [x2 y2] :n)
                   )
-        (= yAxis -1) (-> grid
+        (= xAxis -1) (-> grid
                   (remove-wall-unit [x1 y1] :n)
                   (remove-wall-unit [x2 y2] :s)
+                  )
+        (= yAxis 1) (-> grid
+                  (remove-wall-unit [x1 y1] :e)
+                  (remove-wall-unit [x2 y2] :w)
+                  )
+        (= yAxis -1) (-> grid
+                  (remove-wall-unit [x1 y1] :w)
+                  (remove-wall-unit [x2 y2] :e)
                   )
         )
   )
@@ -107,3 +107,5 @@
 
 ;;thread-first macro (->) ubacivanje rezultat jedog izraza u drugi
 ;;peek uzima sa vrha stack-a ali ga ne brise
+;;#{} je skup
+;;count [matrica] vraca broj redova
