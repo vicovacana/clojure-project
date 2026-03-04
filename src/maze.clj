@@ -68,33 +68,38 @@
 
 (defn generate-maze [rows cols]
   (let [initial-grid (make-grid-for-maze rows cols)
-        start-cell [0 0]] ;;todo napravi da start cell bude random celija iz prvog reda
-    (loop [grid (assoc-in initial-grid [0 0 :visited?] true)
-           stack [start-cell]]
-      
-      (if (empty? stack)
-        grid
+        start-col (rand-int cols)
+        end-col (rand-int cols)
+        start-cell [(dec rows) start-col]
+        end-cell [0 end-col]
 
-        (let [current-cell (peek stack) 
+    grid-with-doors (-> initial-grid
+                        (remove-wall-unit start-cell :s)
+                        (remove-wall-unit end-cell :n))]
+
+    (loop [grid (assoc-in grid-with-doors (conj start-cell :visited?) true)
+           stack [start-cell]
+           history []]
+
+      (if (empty? stack)
+        {:grid grid
+         :start-cell start-cell
+         :end-cell end-cell
+         :history history}
+
+        (let [current-cell (peek stack)
               neighbors (get-unvisited-neighbors grid current-cell)]
-          
+
           (if (empty? neighbors)
-            (recur grid (pop stack)) ;;vracaj za jedan
+            (recur grid (pop stack) history) ;;vracaj za jedan
 
             (let [next-cell (rand-nth neighbors)
                   new-grid (-> grid (remove-wall current-cell next-cell)
-                               (assoc-in (conj next-cell :visited?) true))]
-              
-              (recur new-grid (conj stack next-cell)) ;;dodala novi na stack
-              )
-           )
-          )
-        )
-     )
-    )
-  )
+                               (assoc-in (conj next-cell :visited?) true))
+                  move {:from current-cell :to next-cell}]
 
-;;todo dodaj testove za ove fje
+              (recur new-grid (conj stack next-cell) (conj history move)) ;;dodala novi na stack
+              )))))))
 
 ;;----------------------------------------------------
 ;;NOTES

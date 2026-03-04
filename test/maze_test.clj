@@ -76,20 +76,18 @@
 )
 
 (facts "Test generate-maze"
+    (let [result (generate-maze 3 3)
+        grid (:grid result)]
+    
+    (count grid) => 3
+    (count (first grid)) => 3
 
-  (let [maze (generate-maze 3 3)]
-    (count maze))
-  => 3
-
-  (let [maze (generate-maze 3 3)]
-    (count (first maze)))
-  => 3
-
-  (let [maze (generate-maze 2 2)]
     (every? true?
-            (for [row maze
+            (for [row grid
                   cell row]
-              (:visited? cell))))
-  => true
+              (:visited? cell))) => true
+
+    (every? map? (:history result)) => true
+      )
 )
 
