@@ -73,9 +73,9 @@
         start-cell [(dec rows) start-col]
         end-cell [0 end-col]
 
-    grid-with-doors (-> initial-grid
-                        (remove-wall-unit start-cell :s)
-                        (remove-wall-unit end-cell :n))]
+        grid-with-doors (-> initial-grid
+                            (remove-wall-unit start-cell :s)
+                            (remove-wall-unit end-cell :n))]
 
     (loop [grid (assoc-in grid-with-doors (conj start-cell :visited?) true)
            stack [start-cell]
@@ -91,15 +91,17 @@
               neighbors (get-unvisited-neighbors grid current-cell)]
 
           (if (empty? neighbors)
-            (recur grid (pop stack) history) ;;vracaj za jedan
-
+            (let [new-stack (pop stack)]
+              (if (seq new-stack) 
+                (recur grid new-stack (conj history {:from current-cell :to (peek new-stack)}))
+                (recur grid new-stack history)))
+            
             (let [next-cell (rand-nth neighbors)
                   new-grid (-> grid (remove-wall current-cell next-cell)
                                (assoc-in (conj next-cell :visited?) true))
                   move {:from current-cell :to next-cell}]
 
-              (recur new-grid (conj stack next-cell) (conj history move)) ;;dodala novi na stack
-              )))))))
+              (recur new-grid (conj stack next-cell) (conj history move)))))))))
 
 ;;----------------------------------------------------
 ;;NOTES

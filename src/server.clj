@@ -11,13 +11,11 @@
   (GET "/" []
     (response {:mess "Server is listening"}))
   
-  (POST "/generate" request
-    (let [body (:body request)
-          rows (:rows body 10)
-          cols (:cols body 10)
-          maze-data (m/generate-maze rows cols)]
-      (response maze-data)
-      ))
+(POST "/generate" request
+        (let [body (:body request)
+              size (:size body 10) 
+              maze-data (m/generate-maze size size)]
+          (response maze-data)))
   
   (POST "/solve-a-star" request
     (let [body (:body request)
