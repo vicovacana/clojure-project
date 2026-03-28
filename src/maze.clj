@@ -4,8 +4,8 @@
   (vec (repeat rows
                (vec (repeat cols initial)))))
 
-(defn makeEmptyMaze[mazeSize]
-  (make-grid mazeSize mazeSize {
+(defn make-grid-for-maze [rows cols]
+  (make-grid rows cols {
       :visited? false
       :walls {
         :n true
@@ -24,50 +24,95 @@
 (defn update-value [grid row col newValue]
   (assoc-in grid [row col] newValue))
 
-(defn get-index [rowIndex colIndex rows cols]
-  (when (and (>= rowIndex 0)
-             (< rowIndex rows)
-             (>= colIndex 0)
-             (< colIndex cols))
-    (+ colIndex (* rowIndex cols))))
-
-(defn get-neighbors [rowIndex colIndex grid]
+(defn get-unvisited-neighbors [grid [x y]]
   (let [rows (count grid)
-        cols (count (first grid))]
-    {
-     ;mogu biti nil
-     :top (getIndex (- rowIndex 1) colIndex cols rows)
-     :right (getIndex rowIndex (+ colIndex 1) cols rows)
-     :bottom (getIndex (+ rowIndex 1) colIndex cols rows)
-     :left (getIndex rowIndex (- colIndex 1) cols rows)
-     }
-    ))
+        cols(count (first grid))
+        potential-neighbors [[(dec x) y] ;;svi cvorovi okolo
+                             [x (inc y)]
+                             [(inc x) y]
+                             [x (dec y)]]]
+        (filter (fn [[nx ny]] ;;proveravamo jel visited true
+                 (and (>= nx 0) (< nx rows)
+                      (>= ny 0) (< ny cols)
+                      (not (get-in grid [nx ny :visited?]))))
+               potential-neighbors))
+)
 
-(defn remove-wall-unit[maze coords direction]
-    (assoc-in maze [coords :walls direction] value)  
+(defn remove-wall-unit[grid [row col] direction]
+    (assoc-in grid [row col :walls direction] false)  
 )
 
 (defn remove-wall [grid [x1 y1] [x2 y2]]
   (let [xAxis (- x2 x1)
         yAxis (- y2 y1)]
         (cond
-        (= xAxis 1) (-> maze
-                  (remove-wall-unit [x1 y1] :e)
-                  (remove-wall-unit [x2 y2] :w)
-                  )
-        (= xAxis -1) (-> maze
-                  (remove-wall-unit [x1 y1] :w)
-                  (remove-wall-unit [x2 y2] :e)
-                  )
-        (= yAxis 1) (-> maze
+        (= xAxis 1) (-> grid
                   (remove-wall-unit [x1 y1] :s)
                   (remove-wall-unit [x2 y2] :n)
                   )
-        (= yAxis -1) (-> maze
+        (= xAxis -1) (-> grid
                   (remove-wall-unit [x1 y1] :n)
                   (remove-wall-unit [x2 y2] :s)
+                  )
+        (= yAxis 1) (-> grid
+                  (remove-wall-unit [x1 y1] :e)
+                  (remove-wall-unit [x2 y2] :w)
+                  )
+        (= yAxis -1) (-> grid
+                  (remove-wall-unit [x1 y1] :w)
+                  (remove-wall-unit [x2 y2] :e)
                   )
         )
   )
 )
-;; generisanje lavirinta todo sutra
+
+(defn generate-maze [rows cols]
+  (let [initial-grid (make-grid-for-maze rows cols)
+        start-col (rand-int cols)
+        end-col (rand-int cols)
+        start-cell [(dec rows) start-col]
+        end-cell [0 end-col]
+
+        grid-with-doors (-> initial-grid
+                            (remove-wall-unit start-cell :s)
+                            (remove-wall-unit end-cell :n))]
+
+    (loop [grid (assoc-in grid-with-doors (conj start-cell :visited?) true)
+           stack [start-cell]
+           history []]
+
+      (if (empty? stack)
+        {:grid grid
+         :start-cell start-cell
+         :end-cell end-cell
+         :history history}
+
+        (let [current-cell (peek stack)
+              neighbors (get-unvisited-neighbors grid current-cell)]
+
+          (if (empty? neighbors)
+            (let [new-stack (pop stack)]
+              (if (seq new-stack) 
+                (recur grid new-stack (conj history {:from current-cell :to (peek new-stack)}))
+                (recur grid new-stack history)))
+            
+            (let [next-cell (rand-nth neighbors)
+                  new-grid (-> grid (remove-wall current-cell next-cell)
+                               (assoc-in (conj next-cell :visited?) true))
+                  move {:from current-cell :to next-cell}]
+
+              (recur new-grid (conj stack next-cell) (conj history move)))))))))
+
+;;----------------------------------------------------
+;;NOTES
+;;DFS Backtracking -> Depth-First Search
+;;Uzimam jednog komsiju i pakujem ga u stack, zatim uzimam njegovog komsiju itd.
+;;Kada stignem do cvora koji nema neposecene komsije skidam ga sa stack-a. Zatim za prethodnog komsiju na stack-u vrsim proveru
+;;Provera i skidanje sa stack-a se radi dok se stack ne isprazni
+
+;;prilikom posete skidam zidove -> zidovi ce biti borderi oko celije
+
+;;thread-first macro (->) ubacivanje rezultat jedog izraza u drugi
+;;peek uzima sa vrha stack-a ali ga ne brise
+;;#{} je skup
+;;count [matrica] vraca broj redova
