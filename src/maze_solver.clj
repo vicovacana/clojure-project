@@ -36,6 +36,40 @@
        (recur (cons prev-node path) prev-node)
        path))))
 
+(defn solve-bfs [grid start-node end-node]
+  (loop [state {:queue [start-node]
+                :came-from {}
+                :visited #{start-node}
+                :history []}]
+
+    (let [queue (:queue state)]
+      (if (empty? queue)
+        {:path [] :history (:history state)}
+
+        (let [current (first queue) 
+              new-state {:queue (vec (rest queue))
+                         :came-from (:came-from state)
+                         :visited (:visited state)
+                         :history (conj (:history state) current)}]
+
+          (if (= current end-node)
+            {:path (make-path (:came-from state) current)
+             :history (:history new-state)}
+
+            (let [neighbors (get-accessible-neighbors grid current)
+                  unvisited-neighbors (filter #(not (contains? (:visited new-state) %)) neighbors)
+
+                  state-after-neighbors 
+                  (reduce (fn [curr-state neigh]
+                            {:queue (conj (:queue curr-state) neigh)
+                             :came-from (assoc (:came-from curr-state) neigh current)
+                             :visited (conj (:visited curr-state) neigh)
+                             :history (:history curr-state)})
+                          new-state
+                          unvisited-neighbors)]
+
+              (recur state-after-neighbors))))))))
+
 (defn solve-a-star [grid start-node end-node]
   (loop [state {:open-set #{start-node}
                 :came-from {}

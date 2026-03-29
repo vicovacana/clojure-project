@@ -5,35 +5,43 @@
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.util.response :refer [response]]
             [maze :as m]
-            [maze-solver :as s]))
+            [maze-solver :as s]
+            [ring.middleware.cors :refer [wrap-cors]]))
 
 (defroutes app-routes
   (GET "/" []
     (response {:mess "Server is listening"}))
-  
-(POST "/generate" request
-        (let [body (:body request)
-              size (:size body 10) 
-              maze-data (m/generate-maze size size)]
-          (response maze-data)))
-  
-  (POST "/solve-a-star" request
+
+  (POST "/generate" request
+    (let [body (:body request)
+          size (:size body 10)
+          maze-data (m/generate-maze size size)]
+      (response maze-data)))
+
+  (POST "/solve" request
     (let [body (:body request)
           grid (:grid body)
           start (:start-cell body)
           end (:end-cell body)
-          
-          solution (s/solve-a-star grid start end)]
-      
-      (response solution)))
-  
+          algorithm (:algorithm body)]
+
+      (let [solution (case algorithm
+                       "a-star" (s/solve-a-star grid start end)
+                       "bfs" (s/solve-bfs grid start end)
+
+                       {:error "Unknown algorithm"})]
+
+        (response solution))))
+
   (route/not-found (response {:err "Route not found"})))
 
 ;;middleware (JSON to map and map to JSON)
 (def app
   (-> app-routes
       (wrap-json-body {:keywords? true})
-      (wrap-json-response)))
+      (wrap-json-response)
+      (wrap-cors :access-control-allow-origin [#"http://localhost:4200"]
+                 :access-control-allow-methods [:get :put :post :delete :options])))
 
 (defn -main []
   (println "Server is running....")
