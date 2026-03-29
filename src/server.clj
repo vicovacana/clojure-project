@@ -27,6 +27,7 @@
 
       (let [solution (case algorithm
                        "a-star" (s/solve-a-star grid start end)
+                       "bfs" (s/solve-bfs grid start end)
 
                        {:error "Unknown algorithm"})]
 
