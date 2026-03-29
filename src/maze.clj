@@ -66,6 +66,34 @@
   )
 )
 
+(defn add-shortcuts [grid rows cols num-shortcuts]
+  (loop [g grid
+         n num-shortcuts
+         attempts 200]
+    (if (or (<= n 0) (<= attempts 0))
+      g
+      (let [r (rand-int rows)
+            c (rand-int cols)
+            cell [r c]
+            walls (get-in g [r c :walls])
+            
+            existing-walls (cond-> []
+                             (and (:n walls) (> r 0)) (conj :n)
+                             (and (:s walls) (< r (dec rows))) (conj :s)
+                             (and (:e walls) (< c (dec cols))) (conj :e)
+                             (and (:w walls) (> c 0)) (conj :w))]
+        
+        (if (empty? existing-walls)
+          (recur g n (dec attempts))
+          
+          (let [dir (rand-nth existing-walls)
+                neighbor (case dir
+                           :n [(dec r) c]
+                           :s [(inc r) c]
+                           :e [r (inc c)]
+                           :w [r (dec c)])]
+            (recur (remove-wall g cell neighbor) (dec n) attempts)))))))
+            
 (defn generate-maze [rows cols]
   (let [initial-grid (make-grid-for-maze rows cols)
         start-col (rand-int cols)
@@ -82,10 +110,13 @@
            history []]
 
       (if (empty? stack)
-        {:grid grid
-         :start-cell start-cell
-         :end-cell end-cell
-         :history history}
+        (let [num-shortcuts (int (* rows cols 0.15)) 
+              final-grid (add-shortcuts grid rows cols num-shortcuts)]
+          
+          {:grid final-grid
+           :start-cell start-cell
+           :end-cell end-cell
+           :history history})
 
         (let [current-cell (peek stack)
               neighbors (get-unvisited-neighbors grid current-cell)]
@@ -95,7 +126,7 @@
               (if (seq new-stack) 
                 (recur grid new-stack (conj history {:from current-cell :to (peek new-stack)}))
                 (recur grid new-stack history)))
-            
+
             (let [next-cell (rand-nth neighbors)
                   new-grid (-> grid (remove-wall current-cell next-cell)
                                (assoc-in (conj next-cell :visited?) true))

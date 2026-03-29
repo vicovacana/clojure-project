@@ -3,7 +3,8 @@
                  [ring/ring-core "1.15.3"]
                  [ring/ring-jetty-adapter "1.15.3"]
                  [ring/ring-json "0.5.1"]
-                 [compojure "1.7.2"]]
+                 [compojure "1.7.2"]
+                 [ring-cors "0.1.13"]]
 
   :profiles
   {:dev {:dependencies [[midje "1.10.10"]]}
