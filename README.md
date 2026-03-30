@@ -21,6 +21,9 @@ Exploration (History): Shows how the algorithm searches through dead ends.
 Shortest Path: Highlights the final, optimal route.
 Frontend project: https://github.com/vicovacana/search-algorithms-visualization
 
+### Interactive Manual Mode (Frontend)
+The application isn't just an automated visualizer—it's an interactive game. Users can manually navigate through the dynamically generated mazes using their keyboard/mouse. The frontend tracks the user's real-time coordinates and generates a custom `history` array, allowing them to test their own spatial awareness before running the computer algorithms.
+
 ## Technologies
 
 ### Backend: Clojure
