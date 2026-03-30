@@ -19,7 +19,7 @@ This project was built to demonstrate a deep understanding of data structures, g
 - Distinct visual states for:
 Exploration (History): Shows how the algorithm searches through dead ends.
 Shortest Path: Highlights the final, optimal route.
-Frontend project: 
+Frontend project: https://github.com/vicovacana/search-algorithms-visualization
 
 ## Technologies
 
@@ -34,11 +34,11 @@ Frontend project:
 - Handles precise, interval-based CSS animations to bring the algorithms to life.
 
 ## How to run
-1. Start the clojure project
+1. Start the Clojure project
    lein run
-2. Start the Angular project:
-   npm install
-   npm run dev
+2. Start the Angular project: https://github.com/vicovacana/search-algorithms-visualization
+   - npm install
+   - npm run dev
 3. Browse http://localhost:4200
 
 See details
