@@ -16,22 +16,17 @@
   })
 )
 
-;(def grid (make-grid 3 4 0))
-;(get-in grid [row col])
-
-;(assoc-in grid [1 2] 5) //postavlja novu vrednost polja i tako se dobija novi grid jer su strukture imutabilne
-
 (defn update-value [grid row col newValue]
   (assoc-in grid [row col] newValue))
 
 (defn get-unvisited-neighbors [grid [x y]]
   (let [rows (count grid)
         cols(count (first grid))
-        potential-neighbors [[(dec x) y] ;;svi cvorovi okolo
+        potential-neighbors [[(dec x) y] 
                              [x (inc y)]
                              [(inc x) y]
                              [x (dec y)]]]
-        (filter (fn [[nx ny]] ;;proveravamo jel visited true
+        (filter (fn [[nx ny]] 
                  (and (>= nx 0) (< nx rows)
                       (>= ny 0) (< ny cols)
                       (not (get-in grid [nx ny :visited?]))))
@@ -134,16 +129,3 @@
 
               (recur new-grid (conj stack next-cell) (conj history move)))))))))
 
-;;----------------------------------------------------
-;;NOTES
-;;DFS Backtracking -> Depth-First Search
-;;Uzimam jednog komsiju i pakujem ga u stack, zatim uzimam njegovog komsiju itd.
-;;Kada stignem do cvora koji nema neposecene komsije skidam ga sa stack-a. Zatim za prethodnog komsiju na stack-u vrsim proveru
-;;Provera i skidanje sa stack-a se radi dok se stack ne isprazni
-
-;;prilikom posete skidam zidove -> zidovi ce biti borderi oko celije
-
-;;thread-first macro (->) ubacivanje rezultat jedog izraza u drugi
-;;peek uzima sa vrha stack-a ali ga ne brise
-;;#{} je skup
-;;count [matrica] vraca broj redova

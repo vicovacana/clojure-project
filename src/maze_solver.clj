@@ -1,6 +1,5 @@
 (ns maze-solver (:require [maze :as m]))
 
-;;heuristika - h(n)
 (defn manhattan-distance [[x1 y1] [x2 y2]]
   (+ (Math/abs (- x1 x2)) 
      (Math/abs (- y1 y2))))
@@ -19,13 +18,11 @@
   (let [new-neighbor-g (+ (get (:g-score state) current-node) 1)
         old-neighbor-g (get (:g-score state) neighbor 99999)]
     (if (< new-neighbor-g old-neighbor-g)
-      ;;new state
       {:open-set (conj (:open-set state) neighbor)
        :came-from (assoc (:came-from state) neighbor current-node)
        :g-score (assoc (:g-score state) neighbor new-neighbor-g)
        :f-score (assoc (:f-score state) neighbor (+ new-neighbor-g (manhattan-distance neighbor end-node)))
        :history (:history state)}
-      ;;else
       state)))
 
 (defn make-path [came-from current-node]
@@ -118,14 +115,3 @@
         (do
           (println "SUCCESS")
           (println "Putanja koordinate:" path))))))
-
-;;---------------------------------------------------
-
-;;ALGORITMI
-
-;;A-STAR (A*)
-;;Koristi heuristiku, pamti koliko je otp cilj udaljen, kao i koliko je do sada prosao i koliko mu je ostalo do cilja
-;;f(n)=g(n)+h(n)
-;;g(n) - G-score => cena puta (u lavirintu cena svakog polja je 1) = br koraka
-;;h(n)- H-score (heuristika) => pogadjanje koliko do cilja
-;;f(n) - ukupna cena polja - zelimo da minimizujemo
