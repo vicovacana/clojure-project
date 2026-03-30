@@ -35,7 +35,6 @@
 
   (route/not-found (response {:err "Route not found"})))
 
-;;middleware (JSON to map and map to JSON)
 (def app
   (-> app-routes
       (wrap-json-body {:keywords? true})
@@ -46,5 +45,3 @@
 (defn -main []
   (println "Server is running....")
   (run-jetty app {:port 3000 :join? false}))
-
-;;Jetty Eclipse je Java HTTP web server
