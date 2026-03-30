@@ -41,4 +41,4 @@ Frontend project: https://github.com/vicovacana/search-algorithms-visualization
    - npm run dev
 3. Browse http://localhost:4200
 
-See details
+See more details: https://github.com/vicovacana/clojure-project.wiki.git.
