@@ -22,14 +22,14 @@ Shortest Path: Highlights the final, optimal route.
 Frontend project: https://github.com/vicovacana/search-algorithms-visualization
 
 ### Interactive Manual Mode (Frontend)
-The application isn't just an automated visualizer—it's an interactive game. Users can manually navigate through the dynamically generated mazes using their keyboard/mouse. The frontend tracks the user's real-time coordinates and generates a custom `history` array, allowing them to test their own spatial awareness before running the computer algorithms.
+The application isn't just an automated visualizer, it's interactive. Users can manually navigate through the dynamically generated mazes using their keyboard/mouse. The frontend tracks the user's real-time coordinates and generates a custom `history` array.
 
 ## Technologies
 
 ### Backend: Clojure
 - Uses Ring and Compojure for routing and API endpoints.
 - Pure functional implementation of complex graph algorithms (utilizing persistent data structures like Queues, Sets, and Maps).
-- Fully RESTful JSON API.
+- RESTful JSON API.
 
 ### Frontend: Angular & TypeScript
 - Manages application state and grid rendering.
