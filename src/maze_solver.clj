@@ -1,7 +1,7 @@
 (ns maze-solver (:require [maze :as m]))
 
 (defn manhattan-distance [[x1 y1] [x2 y2]]
-  (+ (Math/abs (- x1 x2)) 
+  (+ (Math/abs (- x1 x2))
      (Math/abs (- y1 y2))))
 
 (defn get-accessible-neighbors [grid [x y]]
@@ -9,10 +9,10 @@
         rows (count grid)
         cols (count (first grid))]
     (cond-> []
-          (and (not (:n walls)) (>= (dec x) 0)) (conj [(dec x) y])
-          (and (not (:s walls)) (< (inc x) rows)) (conj [(inc x) y])
-          (and (not (:e walls)) (< (inc y) cols)) (conj [x (inc y)])
-          (and (not (:w walls)) (>= (dec y) 0)) (conj [x (dec y)]))))
+      (and (not (:n walls)) (>= (dec x) 0)) (conj [(dec x) y])
+      (and (not (:s walls)) (< (inc x) rows)) (conj [(inc x) y])
+      (and (not (:e walls)) (< (inc y) cols)) (conj [x (inc y)])
+      (and (not (:w walls)) (>= (dec y) 0)) (conj [x (dec y)]))))
 
 (defn evaluate-neighbor [current-node end-node state neighbor]
   (let [new-neighbor-g (+ (get (:g-score state) current-node) 1)
@@ -28,10 +28,10 @@
 (defn make-path [came-from current-node]
   (loop [path (list current-node)
          node current-node]
-   (let [prev-node (get came-from node)]
-     (if prev-node
-       (recur (cons prev-node path) prev-node)
-       path))))
+    (let [prev-node (get came-from node)]
+      (if prev-node
+        (recur (cons prev-node path) prev-node)
+        path))))
 
 (defn solve-bfs [grid start-node end-node]
   (loop [state {:queue [start-node]
@@ -43,7 +43,7 @@
       (if (empty? queue)
         {:path [] :history (:history state)}
 
-        (let [current (first queue) 
+        (let [current (first queue)
               new-state {:queue (vec (rest queue))
                          :came-from (:came-from state)
                          :visited (:visited state)
@@ -56,7 +56,7 @@
             (let [neighbors (get-accessible-neighbors grid current)
                   unvisited-neighbors (filter #(not (contains? (:visited new-state) %)) neighbors)
 
-                  state-after-neighbors 
+                  state-after-neighbors
                   (reduce (fn [curr-state neigh]
                             {:queue (conj (:queue curr-state) neigh)
                              :came-from (assoc (:came-from curr-state) neigh current)
@@ -76,42 +76,23 @@
 
     (let [open-set (:open-set state)]
       (if (empty? open-set)
-      {:path [] :history (:history state)}
-      
-      (let [current (apply min-key #(get (:f-score state) % 999999) open-set)
-            new-state {:open-set (disj open-set current)
-                       :came-from (:came-from state)
-                       :g-score (:g-score state)
-                       :f-score (:f-score state)
-                       :history (conj (:history state) current)}]
-        
-        (if (= current end-node) 
-          {:path (make-path (:came-from state) current)
-           :history (:history new-state)
-        }
-          
-          (let [neighbors (get-accessible-neighbors grid current)
-                state-after-neighbors (reduce (fn [curr-state neigh] 
-                                                (evaluate-neighbor current end-node curr-state neigh))
-                                              new-state
-                                              neighbors)]
-            
-            (recur state-after-neighbors))))))))
+        {:path [] :history (:history state)}
 
-(defn a-star-test [] 
-  (let [maze-data (m/generate-maze 10 10) 
-        grid (:grid maze-data)
-        start (:start-cell maze-data)
-        end (:end-cell maze-data)] 
-    
-    (println "TRAZENJE PUTA")
-    (println "=========================================")
-    
-    (let [solution (solve-a-star grid start end)
-          path (:path solution)]
-      
-      (if (empty? path)
-        (println "ERROR")
-        (do
-          (println "SUCCESS")
-          (println "Putanja koordinate:" path))))))
+        (let [current (apply min-key #(get (:f-score state) % 999999) open-set)
+              new-state {:open-set (disj open-set current)
+                         :came-from (:came-from state)
+                         :g-score (:g-score state)
+                         :f-score (:f-score state)
+                         :history (conj (:history state) current)}]
+
+          (if (= current end-node)
+            {:path (make-path (:came-from state) current)
+             :history (:history new-state)}
+
+            (let [neighbors (get-accessible-neighbors grid current)
+                  state-after-neighbors (reduce (fn [curr-state neigh]
+                                                  (evaluate-neighbor current end-node curr-state neigh))
+                                                new-state
+                                                neighbors)]
+
+              (recur state-after-neighbors))))))))

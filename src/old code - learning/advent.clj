@@ -20,25 +20,19 @@
                   0)]
     [res crosses]))
 
- (defn check [res currentZero zeros numberOfZeros]
-    (if (and (= res 0) (> zeros 0)) [(inc currentZero) (+ numberOfZeros zeros) res]
-                         (if (= res 0) [(inc currentZero) (inc numberOfZeros) res]
-                              (if (> zeros 0) [currentZero (+ zeros numberOfZeros) res] [currentZero numberOfZeros res])))
- )
+(defn check [res currentZero zeros numberOfZeros]
+  (if (and (= res 0) (> zeros 0)) [(inc currentZero) (+ numberOfZeros zeros) res]
+      (if (= res 0) [(inc currentZero) (inc numberOfZeros) res]
+          (if (> zeros 0) [currentZero (+ zeros numberOfZeros) res] [currentZero numberOfZeros res]))))
 
 (defn lineReading [[currentZero numberOfZeros cur] line]
-    (let [direction (first line) number (Integer/parseInt (apply str (rest line)))]
-        (if (= direction \R)
-            ( let [[res zeros] (addRight cur number)]
-                (check res currentZero zeros numberOfZeros))
-            ( let [[res zeros] (addLeft cur number)]
-                (check res currentZero zeros numberOfZeros))
-        )
-    )
-)
+  (let [direction (first line) number (Integer/parseInt (apply str (rest line)))]
+    (if (= direction \R)
+      (let [[res zeros] (addRight cur number)]
+        (check res currentZero zeros numberOfZeros))
+      (let [[res zeros] (addLeft cur number)]
+        (check res currentZero zeros numberOfZeros)))))
 
 (defn findSantasPassword [name]
   (with-open [rdr (io/reader name)]
-      (reduce lineReading [0 0 50] (line-seq rdr))
-  )
-)
+    (reduce lineReading [0 0 50] (line-seq rdr))))
